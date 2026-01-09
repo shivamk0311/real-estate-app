@@ -4,6 +4,6 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: white; /* fix dark background */
+  background-color: rgb(241,245,241); /* fix dark background */
   height: 100%;
 }
