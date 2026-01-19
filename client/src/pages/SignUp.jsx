@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -60,9 +59,7 @@ export default function SignUp() {
           <span className='text-blue-700'>Sign In</span>
         </Link>
       </div>
-      {/* {error && <p className='text-red-500 mt-5'>{error}</p>} */}
-      {error ? <p className='text-red-500 mt-5'>{error}</p> : <p className='text-green-500'>User Created Successfully!</p>}
-
+      {error && <p className='text-red-500 mt-5'>{error}</p>}
       
     </div>
   );
