@@ -15,6 +15,7 @@ export default function Profile() {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
+  const [deleteListingError, setDeleteListingError] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -121,6 +122,26 @@ export default function Profile() {
     }
   }
 
+  const handleDeleteListing = async (id) => {
+    try{
+      setDeleteListingError(false);
+      const res = await fetch(`/api/listing/delete/${id}`,
+        {
+          method: 'DELETE',
+        }
+      );
+      const data = await res.json();
+      if(data.success === false){
+        setDeleteListingError(true);
+        return;
+      }
+      setUserListings((prev) => prev.filter((listing) => listing._id !== id));
+      setDeleteListingError(false);
+    }catch(error){  
+      setDeleteListingError(true);
+    }
+  }
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className='text-3xl font-semibold mt-7 text-center'>Profile</h1>
@@ -167,7 +188,7 @@ export default function Profile() {
             <p>{listing.name}</p>
           </Link>
           <div className="flex flex-col items-center">
-            <button className="text-red-700 uppercase cursor-pointer hover:opacity-70">Delete</button>
+            <button onClick={() => handleDeleteListing(listing._id)} className="text-red-700 uppercase cursor-pointer hover:opacity-70">Delete</button>
             <button className="text-green-700 uppercase cursor-pointer hover:opacity-70">Edit</button>
           </div>
 
