@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from "../firebase";
-import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserFailure, signOutUserSuccess, signOutUserStart } from "../redux/user/userSlice.js";
+import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserFailure, signOutUserSuccess, signOutUserStart, clearError } from "../redux/user/userSlice.js";
 import { Link } from "react-router-dom";
 
 export default function Profile() {
@@ -100,6 +100,7 @@ export default function Profile() {
         dispatch(signOutUserFailure(data.message));
         return;
       }
+      dispatch(clearError());
       dispatch(signOutUserSuccess(data));
     }catch(error){
       dispatch(signOutUserFailure(error.message));
