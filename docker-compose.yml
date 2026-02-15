@@ -7,8 +7,7 @@ services:
       - mongo
     environment:
       - FRONTEND_URL=http://localhost
-    # environment:
-    #   - MONGO_URL=mongodb://mongo:27017/realestate
+      - MONGO_URL=mongodb://mongo:27017/realestate
 
   # frontend:
   #   build: ./client
