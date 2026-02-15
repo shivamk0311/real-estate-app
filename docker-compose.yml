@@ -8,6 +8,7 @@ services:
     environment:
       - FRONTEND_URL=http://localhost
       - MONGO=mongodb://mongo:27017/realestate
+      - JWT_SECRET=eliteEstates
 
   # frontend:
   #   build: ./client
