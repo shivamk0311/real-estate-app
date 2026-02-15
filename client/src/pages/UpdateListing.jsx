@@ -35,7 +35,7 @@ export default function CreateListing() {
   useEffect(() => {
     const fetchListing = async () => {
         const listingId = params.listingId;
-        const res = await apiFetch(`/api/listing/get/${listingId}`);
+        const res = await apiFetch(`/listing/get/${listingId}`);
         const data = await res.json();
         if(data.success === false){
             setError(data.message);
@@ -134,7 +134,7 @@ export default function CreateListing() {
         
         setLoading(true);
         setError(false);
-        const res = await apiFetch(`/api/listing/update/${params.listingId}`,
+        const res = await apiFetch(`/listing/update/${params.listingId}`,
             {
                 method: 'POST',
                 headers: {

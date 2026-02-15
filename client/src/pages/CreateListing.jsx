@@ -119,7 +119,7 @@ export default function CreateListing() {
         
         setLoading(true);
         setError(false);
-        const res = await apiFetch('/api/listing/create',
+        const res = await apiFetch('/listing/create',
             {
                 method: 'POST',
                 headers: {

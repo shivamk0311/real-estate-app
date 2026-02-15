@@ -30,7 +30,7 @@ export default function SignIn() {
     try{
       e.preventDefault();
       dispatch(signInStart());
-      const res = await apiFetch('/api/auth/signin', {
+      const res = await apiFetch('/auth/signin', {
         method : 'POST',
         headers : {
           'Content-Type' : 'application/json',

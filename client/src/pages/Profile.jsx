@@ -55,7 +55,7 @@ export default function Profile() {
     e.preventDefault();
     try{
       dispatch(updateUserStart());
-      const res = await apiFetch(`/api/user/update/${currentUser._id}`,
+      const res = await apiFetch(`/user/update/${currentUser._id}`,
         {
           method: 'POST',
           headers: {
@@ -78,7 +78,7 @@ export default function Profile() {
   const handleDelete = async () => {
     try{
       dispatch(deleteUserStart());
-      const res = await apiFetch(`/api/user/delete/${currentUser._id}`, 
+      const res = await apiFetch(`/user/delete/${currentUser._id}`, 
       {
         method: 'DELETE'
       });
@@ -96,7 +96,7 @@ export default function Profile() {
   const handleSignOut = async () => {
     try{
       signOutUserStart();
-      const res = await apiFetch('/api/auth/signout');
+      const res = await apiFetch('/auth/signout');
       const data = res.json();
       if (data.success === false){
         dispatch(signOutUserFailure(data.message));
@@ -112,7 +112,7 @@ export default function Profile() {
   const handleShowListings = async () => {
     try{
       setShowListingsError(false);
-      const res = await apiFetch(`/api/user/listings/${currentUser._id}`);
+      const res = await apiFetch(`/user/listings/${currentUser._id}`);
       const data = await res.json();
       if(data.success === false){
         setShowListingsError(true);
@@ -128,7 +128,7 @@ export default function Profile() {
   const handleDeleteListing = async (id) => {
     try{
       setDeleteListingError(false);
-      const res = await apiFetch(`/api/listing/delete/${id}`,
+      const res = await apiFetch(`/listing/delete/${id}`,
         {
           method: 'DELETE',
         }
