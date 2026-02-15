@@ -29,7 +29,7 @@ services:
       - backend
     environment:
       # - VITE_API_URL=http://backend:3000
-      - VITE_API_URL=http://18.222.31.168:3000
+      - VITE_API_URL=/api
 
 
   mongo:
