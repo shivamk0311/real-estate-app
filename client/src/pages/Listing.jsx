@@ -8,6 +8,8 @@ import {Navigation} from 'swiper/modules';
 import 'swiper/css/bundle';
 import { FaShare, FaMapMarkerAlt, FaBed, FaBath, FaParking, FaChair } from 'react-icons/fa';
 import Contact from "../components/Contact";
+import { apiFetch } from '../../utils/api.js';
+
  
 
 export default function Listing() {
@@ -24,7 +26,7 @@ export default function Listing() {
             try{
                 setLoading(true);
                 
-                const res = await fetch(`/api/listing/get/${params.listingId}`);
+                const res = await apiFetch(`/api/listing/get/${params.listingId}`);
                 const data = await res.json();
                 if(data.success === false){
                     setError(true);

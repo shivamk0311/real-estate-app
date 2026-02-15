@@ -1,0 +1,26 @@
+services:
+  backend:
+    build: ./api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/realestate
+
+  frontend:
+    build: ./client
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    command: npm run dev -- --host
+    environment:
+      - VITE_FIREBASE_API_KEY=AIzaSyC1LXost2evWSlUQwyYnE6_56-df2l2SVM
+      - VITE_API_URL=http://localhost:3000
+
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"

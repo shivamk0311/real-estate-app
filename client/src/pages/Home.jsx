@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/bundle';
 import ListingCard from '../components/ListingCard';
+import { apiFetch } from '../../utils/api.js';
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
@@ -15,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     const fetchOffers = async () => {
       try{
-        const res = await fetch(`/api/listing/get?offer=true&limit=3`);
+        const res = await apiFetch(`/api/listing/get?offer=true&limit=3`);
         const data = await res.json();
         setOfferListings(data);
         fetchRents();
@@ -26,7 +27,7 @@ export default function Home() {
 
     const fetchRents = async () => {
       try{
-        const res = await fetch(`/api/listing/get?type=rent&limit=3`);
+        const res = await apiFetch(`/api/listing/get?type=rent&limit=3`);
         const data = await res.json();
         setRentListings(data);
         fetchSales();
@@ -37,7 +38,7 @@ export default function Home() {
 
     const fetchSales = async () => {
       try{
-        const res = await fetch(`/api/listing/get?type=sale&limit=3`);
+        const res = await apiFetch(`/api/listing/get?type=sale&limit=3`);
         const data = await res.json();
         setSaleListings(data);
       }catch(error){

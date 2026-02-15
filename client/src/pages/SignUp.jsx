@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import OAuth from '../components/OAuth';
+import { apiFetch } from '../../utils/api.js';
+
 
 export default function SignUp() {
 
@@ -23,7 +25,7 @@ export default function SignUp() {
       e.preventDefault();
       setError(null);
       setLoading(true);
-      const res = await fetch('/api/auth/signup', {
+      const res = await apiFetch('/api/auth/signup', {
         method : 'POST',
         headers : {
           'Content-Type' : 'application/json',

@@ -3,6 +3,8 @@ import { useRef, useState } from "react"
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { apiFetch } from '../../utils/api.js';
+
 
 export default function CreateListing() {
 
@@ -117,7 +119,7 @@ export default function CreateListing() {
         
         setLoading(true);
         setError(false);
-        const res = await fetch('/api/listing/create',
+        const res = await apiFetch('/api/listing/create',
             {
                 method: 'POST',
                 headers: {

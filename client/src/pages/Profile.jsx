@@ -4,6 +4,8 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/
 import { app } from "../firebase";
 import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserFailure, signOutUserSuccess, signOutUserStart, clearError } from "../redux/user/userSlice.js";
 import { Link } from "react-router-dom";
+import { apiFetch } from '../../utils/api.js';
+
 
 export default function Profile() {
   const {currentUser, loading, error} = useSelector(state => state.user);
@@ -53,7 +55,7 @@ export default function Profile() {
     e.preventDefault();
     try{
       dispatch(updateUserStart());
-      const res = await fetch(`/api/user/update/${currentUser._id}`,
+      const res = await apiFetch(`/api/user/update/${currentUser._id}`,
         {
           method: 'POST',
           headers: {
@@ -76,7 +78,7 @@ export default function Profile() {
   const handleDelete = async () => {
     try{
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, 
+      const res = await apiFetch(`/api/user/delete/${currentUser._id}`, 
       {
         method: 'DELETE'
       });
@@ -94,7 +96,7 @@ export default function Profile() {
   const handleSignOut = async () => {
     try{
       signOutUserStart();
-      const res = await fetch('/api/auth/signout');
+      const res = await apiFetch('/api/auth/signout');
       const data = res.json();
       if (data.success === false){
         dispatch(signOutUserFailure(data.message));
@@ -110,7 +112,7 @@ export default function Profile() {
   const handleShowListings = async () => {
     try{
       setShowListingsError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const res = await apiFetch(`/api/user/listings/${currentUser._id}`);
       const data = await res.json();
       if(data.success === false){
         setShowListingsError(true);
@@ -126,7 +128,7 @@ export default function Profile() {
   const handleDeleteListing = async (id) => {
     try{
       setDeleteListingError(false);
-      const res = await fetch(`/api/listing/delete/${id}`,
+      const res = await apiFetch(`/api/listing/delete/${id}`,
         {
           method: 'DELETE',
         }
