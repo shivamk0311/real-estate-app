@@ -6,20 +6,9 @@ services:
     depends_on:
       - mongo
     environment:
-      - FRONTEND_URL=http://18.222.31.168
+      - FRONTEND_URL=http://3.151.21.145
       - MONGO=mongodb://mongo:27017/realestate
       - JWT_SECRET=eliteEstates
-
-  # frontend:
-  #   build: ./client
-  #   ports:
-  #     - "5173:5173"
-  #   depends_on:
-  #     - backend
-  #   command: npm run dev -- --host
-  #   environment:
-  #     - VITE_FIREBASE_API_KEY=AIzaSyC1LXost2evWSlUQwyYnE6_56-df2l2SVM
-  #     - VITE_API_URL=http://localhost:3000
 
   frontend:
     build:
@@ -32,15 +21,8 @@ services:
     depends_on:
       - backend
     environment:
-      # - VITE_API_URL=http://backend:3000
       - VITE_API_URL=/api
-
 
   mongo:
     image: mongo
 
-
-  # mongo:
-  #   image: mongo
-  #   ports:
-  #     - "27017:27017"

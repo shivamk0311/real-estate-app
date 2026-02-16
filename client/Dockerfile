@@ -1,12 +1,3 @@
-# FROM node:20
-# WORKDIR /app
-# COPY package*.json ./
-# RUN npm install
-# COPY . .
-# EXPOSE 5173
-# CMD ["npm", "run", "dev"]
-
-# Build stage
 FROM node:20 AS build
 
 ARG VITE_API_URL
