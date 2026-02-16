@@ -1,53 +1,64 @@
-# 🏡 EliteEstates — MERN Real Estate Marketplace
+# 🏡 EliteEstates — MERN Real Estate Marketplace (AWS Deployed)
 
-EliteEstates is a full-stack real estate marketplace application built using the **MERN stack (MongoDB, Express, React, Node.js)**.
+EliteEstates is a production-ready full-stack real estate marketplace built using the **MERN stack (MongoDB, Express, React, Node.js)** and deployed on **AWS EC2**.
 
-The platform allows users to create, browse, search, and manage property listings with secure authentication and Google OAuth integration.
+The platform allows users to create, browse, search, and manage property listings with secure authentication, Google OAuth integration, and scalable cloud deployment.
 
-The entire application is fully **containerized using Docker and Docker Compose** for seamless local development and deployment.
+The application is fully **containerized using Docker and Docker Compose** and now runs in production on an AWS EC2 instance, integrated with **GitHub Actions CI/CD pipelines** for 
+
+automated builds and deployments.
 
 ---
 
-## 🚀 Features
+# 🌍 Live Deployment
 
-### 👤 Authentication
+🚀 **Production Environment:** Hosted on AWS EC2  
+🐳 Fully containerized with Docker  
+🔁 Automated CI/CD using GitHub Actions
+🔒 Secure environment-based configuration  
+
+---
+
+# 🚀 Features
+
+## 👤 Authentication
 - Secure JWT-based authentication
 - Google OAuth integration via Firebase
 - Protected routes
-- Persistent login sessions using cookies
+- Persistent login sessions using HTTP-only cookies
+- Secure cookie handling in production
 
-### 🏠 Listings
+## 🏠 Listings
 - Create, update, and delete property listings
 - Upload multiple property images
 - Property types (Rent / Sale)
 - Offer pricing support
 - Swiper-based image slider
-- User-specific listing management
+- User-specific listing dashboard
 
-### 🔎 Search & Filtering
+## 🔎 Search & Filtering
 - Filter by:
   - Type (Rent / Sale)
   - Offer
   - Bedrooms
   - Bathrooms
-- Dynamic query-based search
+- Dynamic query-based filtering
 - Real-time filtered results
 
-### 🛠 Backend
+## 🛠 Backend
 - RESTful API architecture
 - MongoDB with Mongoose ODM
 - Express middleware (CORS, cookies, JSON parsing)
 - Environment-based configuration
-- Secure cookie handling
+- Production-ready CORS setup
+- Secure cookie + JWT auth strategy
 
-### 🐳 DevOps
-- Fully containerized using Docker
-- Multi-container architecture:
-  - Frontend (Vite + React)
-  - Backend (Node + Express)
-  - MongoDB
-- Docker internal networking between services
-- Environment separation for local & containerized development
+## 🐳 DevOps & Cloud
+- Docker
+- Docker Compose
+- AWS EC2 (Ubuntu)
+- GitHub Actions (CI/CD)
+- Linux server deployment
 
 ---
 
@@ -70,44 +81,29 @@ The entire application is fully **containerized using Docker and Docker Compose*
 - Cookie Parser
 - CORS
 
-## DevOps
+## DevOps & Cloud
 - Docker
 - Docker Compose
+- AWS EC2 (Ubuntu)
+- Linux-based deployment
+- Environment-based configs
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 ```
 mern-estate/
 │
-├── api/                      # Backend (Node + Express)
-│   ├── controllers/          # Route controllers
-│   ├── models/               # Mongoose schemas
-│   ├── routes/               # API route definitions
-│   ├── utils/                # Helper utilities (auth, error handlers, etc.)
-│   ├── index.js              # Express entry point
-│   ├── Dockerfile            # Backend container config
-│   ├── package.json
-│   └── .env
-│
-├── client/                   # Frontend (React + Vite)
-│   ├── src/
-│   │   ├── components/       # Reusable UI components
-│   │   ├── pages/            # App pages (Home, SignIn, etc.)
-│   │   ├── redux/            # Redux state management
-│   │   ├── utils/            # API helper functions
-│   │   ├── firebase.js       # Firebase configuration
-│   │   └── main.jsx
-│   ├── Dockerfile            # Frontend container config
-│   ├── package.json
-│   └── .env
-│
-├── docker-compose.yml        # Multi-container orchestration
+├── api/
+├── client/
+├── docker-compose.yml
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
 ├── README.md
 └── .gitignore
 ```
-
 
 ---
 
@@ -115,153 +111,121 @@ mern-estate/
 
 ## Backend (`api/.env`)
 
-For Docker:
+### Production (AWS EC2)
+
+```env
+MONGO=mongodb://mongo:27017/realestate
+JWT_SECRET=your_production_secret
+NODE_ENV=production
+```
+
+### Local Development
 
 ```env
 MONGO=mongodb://localhost:27017/realestate
 JWT_SECRET=your_secret_key
-``` 
-
-For local development:
-
-```env
-MONGO=mongodb://mongo:27017/realestate
-JWT_SECRET=your_secret_key
-```  
+NODE_ENV=development
+```
 
 ---
 
 ## Frontend (`client/.env`)
 
-For local development:
+### Production
 
 ```env
-VITE_FIREBASE_API_KEY=your_firebase_key  
-VITE_API_URL=http://localhost:3000  
+VITE_FIREBASE_API_KEY=your_firebase_key
+VITE_API_URL=http://<EC2_PUBLIC_IP>:3000
 ```
-For Docker:
+
+### Local Development
 
 ```env
-VITE_API_URL=http://backend:3000  
+VITE_FIREBASE_API_KEY=your_firebase_key
+VITE_API_URL=http://localhost:3000
 ```
+
 ---
 
-# 🐳 Running the Application (Docker — Recommended)
+# 🐳 Running the Application (Docker — Local)
 
 ## 1️⃣ Install Docker
 
-Download and install Docker Desktop:
+Download Docker Desktop:
 
-```env
 https://www.docker.com/products/docker-desktop/
-```
-Make sure Docker is running before continuing.
+
+Ensure Docker is running.
 
 ---
 
-## 2️⃣ Build and Start Containers
+## 2️⃣ Build and Start
 
-From the project root directory:
+From project root:
 
-```env
+```bash
 docker compose up --build
 ```
 
-This will:
-
-- Build frontend container
-- Build backend container
-- Pull MongoDB image
-- Create Docker network
-- Start all services
-
 ---
 
-## 3️⃣ Access the Application
+## 3️⃣ Access
 
-Frontend: 
-```env
-http://localhost:5173  
+Frontend:
 ```
-Backend:  
-```env
-http://localhost:3000  
+http://localhost:5173
 ```
 
-MongoDB:  
-```env
-mongodb://localhost:27017  
+Backend:
 ```
+http://localhost:3000
+```
+
 ---
 
 ## 4️⃣ Stop Containers
 
-Press:
-
-```env
+```bash
 Ctrl + C
 ```
 
-To completely remove containers:
+Remove containers:
 
-```env
+```bash
 docker compose down
 ```
 
-To remove volumes as well:
+Remove volumes:
 
-```env
+```bash
 docker compose down -v
 ```
+
 ---
 
-# 🖥 Running Without Docker (Manual Setup)
+# ☁️ AWS EC2 Deployment Steps (High Level)
 
-## Step 1: Start MongoDB locally
+1. Launch Ubuntu EC2 instance
+2. Configure Security Groups (open ports 3000 / 5173 or 80)
+3. SSH into EC2
+4. Install Docker & Docker Compose
+5. Clone repository
+6. Configure production `.env` files
+7. Run:
 
-Ensure MongoDB is installed and running on:
-
-```env
-mongodb://localhost:27017  
-```
----
-
-## Step 2: Start Backend
-
-```env
-cd api  
-npm install  
-npm run dev  
+```bash
+docker compose up -d --build
 ```
 
-Backend will run on:  
-```env
-http://localhost:3000  
-```
----
-
-## Step 3: Start Frontend
-
-```env
-cd client  
-npm install  
-npm run dev  
-```
-
-Frontend will run on:
-```env
-http://localhost:5173  
-```
+Application runs in detached production mode.
 
 ---
 
 # 🌐 API Endpoints
 
-## User Routes
+## User Routes (Protected — JWT Required)
 
-(Protected — requires JWT cookie)
-
-```env
+```
 GET    /api/user/test
 POST   /api/user/update/:id
 DELETE /api/user/delete/:id
@@ -271,80 +235,73 @@ GET    /api/user/:id
 
 ## Auth Routes
 
-```env
-POST   /api/auth/sign-in  
-POST   /api/auth/sign-up  
-POST   /api/auth/google  
-GET    /api/auth/sign-out  
+```
+POST   /api/auth/sign-in
+POST   /api/auth/sign-up
+POST   /api/auth/google
+GET    /api/auth/sign-out
 ```
 
 ## Listing Routes
 
-```env
-POST   /api/listing/create  
-GET    /api/listing/get  
-GET    /api/listing/:id  
-DELETE /api/listing/delete/:id  
-POST   /api/listing/update/:id  
 ```
+POST   /api/listing/create
+GET    /api/listing/get
+GET    /api/listing/:id
+DELETE /api/listing/delete/:id
+POST   /api/listing/update/:id
+```
+
 ---
 
-# 🔐 CORS Configuration
+# 🔐 Production CORS Configuration
 
-Backend CORS configuration:
+Example:
 
-```env
+```js
 app.use(cors({
-  origin: ['http://localhost:5173'],
+  origin: [
+    'http://localhost:5173',
+    'http://<EC2_PUBLIC_IP>:5173'
+  ],
   credentials: true
 }));
 ```
-
-This enables secure cross-origin cookie-based authentication.
 
 ---
 
 # 📦 Docker Architecture
 
-```env
-Service   | Port   | Description  
-----------|--------|------------------------  
-backend   | 3000   | Express API Server  
-frontend  | 5173   | React (Vite) App  
-mongo     | 27017  | MongoDB Database  
+```
+Service    | Port   | Description
+-----------|--------|-------------------------
+backend    | 3000   | Express API Server
+frontend   | 5173   | React (Vite) App
+mongo      | 27017  | MongoDB Database
 ```
 
-All services communicate through Docker’s internal network.
+All services communicate via Docker’s internal network.
 
 ---
 
-# 🧠 Key Engineering Concepts Applied
+# 🧠 Engineering Concepts Applied
 
-- Full-stack MERN architecture  
-- JWT-based authentication  
-- Google OAuth with Firebase  
-- Multi-container Docker setup  
-- Service-based internal networking  
-- Environment-specific API configuration  
-- CORS handling for secure cross-origin requests  
-
----
-
-# 📌 Future Improvements
-
-- Production Docker build using Nginx  
-- CI/CD integration  
-- Pagination for listings  
-- Role-based access control  
-- Automated testing  
-- Deployment to AWS / Render  
+- Full-stack MERN architecture
+- JWT + cookie-based authentication
+- Google OAuth integration
+- Docker multi-container setup
+- Internal Docker networking
+- AWS EC2 cloud deployment
+- GitHub Actions CI/CD automation
+- Environment-based production configuration
+- Secure CORS handling
 
 ---
 
 # 👨‍💻 Author
 
 Shivam Khokhani  
-Full Stack Developer  
+Full Stack Developer   
 
 ---
 
