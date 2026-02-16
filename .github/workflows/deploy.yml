@@ -17,6 +17,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd RealEstateApp
+            cd /home/ubuntu/RealEstateApp
             git pull origin main
             docker compose up -d --build
